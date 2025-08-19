@@ -71,6 +71,13 @@ public class OrderServices
             discount = 0.10;
         }
 
-        return order.getoPrice() - discount * order.getoPrice();
+        double subtotal = order.getoPrice() * order.getoQuantity();
+        double discountAmount = subtotal * discount;
+        double totalAmmout = subtotal - discountAmount;
+
+        order.setTotalAmmout(totalAmmout);
+        this.orderRepository.save(order);
+
+        return totalAmmout;
     }
 }

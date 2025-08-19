@@ -13,7 +13,20 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Orders
 {
-	@Id
+    public Orders(){
+
+    }
+
+    public Orders(String oName, int oId, double oPrice, int oQuantity, Date orderDate, User user) {
+        this.oName = oName;
+        this.oId = oId;
+        this.oPrice = oPrice;
+        this.oQuantity = oQuantity;
+        this.orderDate = orderDate;
+        this.user = user;
+    }
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int oId;
 	private String oName;
