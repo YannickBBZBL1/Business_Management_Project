@@ -10,9 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -58,6 +56,24 @@ public class WhiteBoxTest {
         // Verify interaction
         Mockito.verify(orderRepository).getReferenceById(id);
         assertEquals(0, price);
+    }
+
+    @Test
+    void test_processOrder_QuantityIsPositiveReturnsZero() {
+        int id = 1;
+        Orders mockOrder = new Orders("Name", id, 10, 1, new Date(), new User());
+        mockOrder.setoId(id);
+
+        // Mock repository behavior
+        Mockito.when(orderRepository.getReferenceById(id)).thenReturn(mockOrder);
+        Mockito.when(orderRepository.save(mockOrder)).thenReturn(mockOrder);
+
+        // Call service
+        double price = orderService.processOrder(id);
+
+        // Verify interaction
+        Mockito.verify(orderRepository).getReferenceById(id);
+        assertEquals(10, price);
     }
 
     @Test

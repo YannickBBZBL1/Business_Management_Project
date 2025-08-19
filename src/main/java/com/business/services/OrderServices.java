@@ -52,7 +52,7 @@ public class OrderServices
 
         Orders order = this.orderRepository.getReferenceById(id);
 
-        if (order.getoQuantity() <= 0) {
+        if (order.getoQuantity() <= 0) { // The mutation test failes -> 0 * bla = 0 -> test green
             System.out.println("Invalid quantity.");
             return 0;
         }
