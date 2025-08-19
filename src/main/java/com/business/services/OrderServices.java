@@ -46,5 +46,31 @@ public class OrderServices
 	{
 	 return  this.orderRepository.findOrdersByUser(user);
 	}
-	
+
+    //process the Order
+    public double processOrder(int id) {
+
+        Orders order = this.orderRepository.getReferenceById(id);
+
+        if (order.getoQuantity() <= 0) {
+            System.out.println("Invalid quantity.");
+            return 0;
+        }
+
+        if (order.getUser() != null && order.getoName() != null && !order.getoName().isEmpty()) {
+            System.out.println("Processing order for user: " + order.getUser().getUname());
+        } else {
+            System.out.println("Order must have a user and product name.");
+            return 0;
+        }
+
+        double discount = 0;
+        if (order.getoQuantity() >= 10) {
+            discount = 0.20;
+        } else if (order.getoQuantity() >= 5) {
+            discount = 0.10;
+        }
+
+        return order.getoPrice() - discount * order.getoPrice();
+    }
 }
