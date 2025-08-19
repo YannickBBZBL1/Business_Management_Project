@@ -117,7 +117,7 @@ public class WhiteBoxTest {
     @Test
     void test_processOrder_QuantityIsUnderFiveNoDiscount() {
         int id = 1;
-        Orders mockOrder = new Orders("Name", id, 10, 2, new Date(), new User());
+        Orders mockOrder = new Orders("Name", id, 10, 4, new Date(), new User());
         mockOrder.setoId(id);
 
         // Mock repository behavior
@@ -129,7 +129,7 @@ public class WhiteBoxTest {
 
         // Verify interaction
         Mockito.verify(orderRepository).getReferenceById(id);
-        assertEquals(20, price);
+        assertEquals(40, price);
     }
 
     @Test
