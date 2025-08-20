@@ -13,7 +13,19 @@ public class Product
 	private int pid;
 	private String pname;
 	private double pprice;
-	private String pdescription;
+    private String pdescription;
+    private double pweight;
+
+    public Product(int pid, String pname, String pdescription, double pweight) {
+        this.pid = pid;
+        this.pname = pname;
+        this.pdescription = pdescription;
+        this.pweight = pweight;
+    }
+
+    public Product(){
+
+    }
 
 	public int getPid() {
 		return pid;
@@ -39,6 +51,9 @@ public class Product
 	public void setPdescription(String pdescription) {
 		this.pdescription = pdescription;
 	}
+    public double getPweight(){return this.pweight;}
+    public void setPweight(double weight){ this.pweight = weight; }
+
 	@Override
 	public String toString() {
 		return "Product [pid=" + pid + ", pname=" + pname + ", pprice=" + pprice + ", pdescription=" + pdescription

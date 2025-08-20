@@ -3,6 +3,7 @@ package com.business.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.business.entities.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -66,4 +67,34 @@ public class ProductServices
 		return null;
 	
 	}
+
+    public double calculateFinalPrice(double basePrice, int id) {
+
+        Product product = this.getProduct(id);
+        double price = basePrice;
+
+
+        if (price < 100) {
+            price *= 1.07;
+        } else {
+            price *= 1.19;
+        }
+
+        double weight = product.getPweight();
+        if (weight > 10) {
+            price += (weight - 10) * 2;
+        } else if (weight > 5) {
+            price += (weight - 5) * 1.5;
+        } else {
+            price += weight * 1;
+        }
+
+        if (price > 500) {
+            price += 50;
+        }
+
+        product.setPprice(price);
+        this.productRepository.save(product);
+        return price;
+    }
 }
