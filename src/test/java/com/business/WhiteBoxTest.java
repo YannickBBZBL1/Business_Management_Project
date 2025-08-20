@@ -26,7 +26,6 @@ public class WhiteBoxTest {
     void test_processOrder_QuantityIsZeroReturnsZero() {
         int id = 1;
         Orders mockOrder = new Orders("Name", id, 10, 0, new Date(), new User());
-        mockOrder.setoId(id);
 
         // Mock repository behavior
         Mockito.when(orderRepository.getReferenceById(id)).thenReturn(mockOrder);
